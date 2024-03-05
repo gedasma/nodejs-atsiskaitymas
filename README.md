@@ -25,5 +25,3 @@ GET/api/repairman/:id/likes/getAll
 GET/api/repairman/:id/likes
 POST/api/repairman/:id/likes
 DELETE/api/repairman/:id/likes
-
-*has filter functionality example: ##GET/api/service?owner=ownername&sort=-address

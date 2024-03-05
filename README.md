@@ -1,26 +1,20 @@
-#service endpoints:
-
+# service endpoints:
 GET/api/service *
 GET/api/service/:id
 POST/api/service/:id
 PATCH/api/service/:id
 DELETE/api/service/:id
 
-#service endpoints:
-
+# repairman endpoints:
 GET/api/repairman *
 GET/api/repairman/:id
 POST/api/repairman/:id
 PATCH/api/repairman/:id
 DELETE/api/repairman/:id
-
-#user endpoints:
-
+# user endpoints:
 POST/api/register
 POST/api/login
-
-#service endpoints:
-
+# like endpoints:
 GET/api/repairman/:id/likes/getAll
 GET/api/repairman/:id/likes
 POST/api/repairman/:id/likes

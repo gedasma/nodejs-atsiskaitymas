@@ -2,6 +2,7 @@ const fs = require('fs')
 const Repairman = require('./../models/repairmanModel')
 const Service = require('./../models/serviceModel')
 const APIFeatures = require('../utils/apiTools')
+const User = require('./../models/userModel')
 const {promisify} = require('util')
 
 exports.checkBody = (req, res, next) =>{
@@ -105,11 +106,31 @@ exports.updateRepairman = async (req,res)=>{
     catch(err){
         res.status(404).json({
             status: 'failed',
-            message: err
+            message: err.message
         })
     }
     
 };
+
+exports.creatorAccess = async (req,res,next)=>{
+    try{
+        const user = await User.findById(req.user.id)
+        console.log(user.role)
+        const checkRepairman = await Repairman.findById(req.params.id)
+        if(req.user.id != checkRepairman.user ){
+            if(user.role != "admin"){
+                throw new Error("You do not have access to this repairman post")
+            }
+        }
+        next()
+    }catch(err){
+        res.status(400).json({
+            status:'failed',
+            error:err.message
+        })
+    }
+    
+}
  
 exports.deleteRepairman = async (req,res)=>{
     try{
@@ -130,21 +151,3 @@ exports.deleteRepairman = async (req,res)=>{
     }
     
 };
-
-
-
-// exports.checkID = (req, res, next) => {
-//     const repairman = repairmans.find((repairman) => repairman.id == req.params.id);
-//     if (req.params.id > repairmans.length)
-//     {
-//         res.status(404).json({
-//             status: 'failure',
-//             message: 'invalid ID',
-//         })
- 
-//         return
-//     }
- 
-//     req.repairman = repairman
-//     next()
-// }

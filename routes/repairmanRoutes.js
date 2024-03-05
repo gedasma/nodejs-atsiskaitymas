@@ -13,8 +13,10 @@ router.route('/:id')
     .get(repairmanController.getRepairman)
     .patch(
         authController.protect,
+        repairmanController.creatorAccess,
         repairmanController.updateRepairman)
     .delete(
         authController.protect,
+        repairmanController.creatorAccess,
         repairmanController.deleteRepairman)
 module.exports = router

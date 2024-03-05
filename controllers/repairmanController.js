@@ -1,9 +1,7 @@
-const fs = require('fs')
 const Repairman = require('./../models/repairmanModel')
 const Service = require('./../models/serviceModel')
 const APIFeatures = require('../utils/apiTools')
 const User = require('./../models/userModel')
-const {promisify} = require('util')
 
 exports.checkBody = (req, res, next) =>{
     if(!req.body.name || !req.body.room_price){
